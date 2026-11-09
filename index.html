@@ -4,27 +4,126 @@
 </style></head><body><main class="quote" aria-live="polite"><div class="quote-text" id="quote"></div><div class="author" id="author"></div></main><script>
 // Edit this list to add your own confirmed book quotes.
 const quotes=[
-{text:'If you will not hear me, I will make myself heard.',author:'Cade'},
-{text:'Whose child is that?',author:'Varos'},
-{text:'I can count.',author:'Cade'},
-{text:'You’ve missed a few.',author:'Mae'},
-{text:'She is mine.',author:'The Cosmic Mother'},
-{text:'I reject you.',author:'Cade'},
-{text:'But don’t touch the boy.',author:'Veda'},
-{text:'I’m Elaria. But if you ever call me that, I’ll make sure you regret it.',author:'Elle'},
-{text:'The Waystone it is!',author:'Yaris'}
+  {
+    "text": "If you will not hear me, I will make myself heard.",
+    "author": "Cade"
+  },
+  {
+    "text": "Whose child is that?",
+    "author": "Varos"
+  },
+  {
+    "text": "I can count.",
+    "author": "Cade"
+  },
+  {
+    "text": "You’ve missed a few.",
+    "author": "Mae"
+  },
+  {
+    "text": "She is mine.",
+    "author": "The Cosmic Mother"
+  },
+  {
+    "text": "I reject you.",
+    "author": "Cade"
+  },
+  {
+    "text": "But don’t touch the boy.",
+    "author": "Veda"
+  },
+  {
+    "text": "I’m Elaria. But if you ever call me that, I’ll make sure you regret it.",
+    "author": "Elle"
+  },
+  {
+    "text": "The Waystone it is!",
+    "author": "Yaris"
+  },
+  {
+    "text": "As it was.",
+    "author": "Veyrathi"
+  },
+  {
+    "text": "You look nice.",
+    "author": "Speaker TBD"
+  },
+  {
+    "text": "I pulled on one that was already fraying.",
+    "author": "Caelith"
+  },
+  {
+    "text": "I remember fourteen voices where there are none now.",
+    "author": "The Cosmic Mother"
+  },
+  {
+    "text": "I have known the beginning of every world.",
+    "author": "The Cosmic Mother"
+  },
+  {
+    "text": "And I have known its end.",
+    "author": "The Cosmic Mother"
+  },
+  {
+    "text": "But perhaps the measure had been wrong.",
+    "author": "The Cosmic Mother"
+  },
+  {
+    "text": "For creation is not always the act of making something new.",
+    "author": "The Cosmic Mother"
+  },
+  {
+    "text": "Sometimes it is the recognition of what has been waiting to exist.",
+    "author": "The Cosmic Mother"
+  },
+  {
+    "text": "I would not repeat the same beginning.",
+    "author": "The Cosmic Mother"
+  },
+  {
+    "text": "Simply as another beginning.",
+    "author": "The Cosmic Mother"
+  },
+  {
+    "text": "She had made the universe, and yet there was no one to witness it.",
+    "author": "The First Creations"
+  },
+  {
+    "text": "So she began again.",
+    "author": "The First Creations"
+  },
+  {
+    "text": "They did not yet understand how much they had lost.",
+    "author": "The First Creations"
+  },
+  {
+    "text": "They believed they had sacrificed enough.",
+    "author": "The First Creations"
+  },
+  {
+    "text": "But the universe had never promised that love would come without consequence.",
+    "author": "The First Creations"
+  },
+  {
+    "text": "And somewhere, among the worlds they had made, a heart was already beginning to break.",
+    "author": "The First Creations"
+  },
+  {
+    "text": "He had stopped believing that anyone would.",
+    "author": "The Thing Beneath"
+  }
 ];
-// Rotate once per hour, based on the viewer's local clock. The same quote
-// stays visible throughout the hour, including after a page reload.
+// Rotate every 20 minutes using the viewer's local clock. A new quote
+// appears at :00, :20 and :40, even if the page remains open.
 const quoteNode=document.getElementById('quote');
 const authorNode=document.getElementById('author');
-let displayedHour=null;
+let displayedSlot=null;
 function updateQuote(){
   const now=new Date();
-  const hourNumber=Math.floor(new Date(now.getFullYear(),now.getMonth(),now.getDate(),now.getHours()).getTime()/3600000);
-  if(hourNumber===displayedHour)return;
-  displayedHour=hourNumber;
-  const index=((hourNumber%quotes.length)+quotes.length)%quotes.length;
+  const slotNumber=Math.floor(now.getTime()/1200000);
+  if(slotNumber===displayedSlot)return;
+  displayedSlot=slotNumber;
+  const index=((slotNumber%quotes.length)+quotes.length)%quotes.length;
   quoteNode.textContent=quotes[index].text;
   authorNode.textContent='— '+quotes[index].author;
 }
